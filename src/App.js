@@ -14,24 +14,31 @@ export default class DemoApp extends React.Component {
   state = {
     setOpen: false,
     open: false, 
-    calendarEvents: [{
-      timeZone: 'local',
-      id: Date.now(),
-      title: 'new',
-      start: new Date(),
-      startEvent: false,
-      bacground: 'blue',
-    },
-    ],
+    calendarEvents: [],
   }
 
-  handleChangeEvent = () => {
-    // this.setState({
-    //   calendarEvent: prevState.calendarEvents.map(
-    //     eventUnic => ({ 
-    //     ...eventUnic, 
-    //     title: eventUnic.id === +info.event.id ? 'Clicked' : eventUnic.title}))
-    // });  
+  componentWillMount() {
+      if (localStorage.getItem('calendarEvents')) {
+        this.setState({
+          calendarEvents: JSON.parse(localStorage.getItem('calendarEvents')),
+        });
+      }
+    }
+  
+    componentDidUpdate() {
+      localStorage.setItem('calendarEvents', JSON.stringify(this.state.calendarEvents));
+    }
+
+  handleChangeEvent = (mapOnInfo, id) => {
+    console.log(mapOnInfo, id)
+    this.setState(prevState => ({
+      calendarEvent: prevState.calendarEvents.map(
+        eventUnic => ({ 
+        ...eventUnic, 
+        title: mapOnInfo.title,
+        })),
+      setOpen: false,
+    }));  
   }
   
 
@@ -40,10 +47,10 @@ export default class DemoApp extends React.Component {
       if (eventObj.allDay) {
         this.setState(prevState => ({
           setOpen: true,
-          calendarEvents: prevState.calendarEvents.map(
-          eventUnic => ({ 
-          ...eventUnic, 
-          title: eventUnic.id === +info.event.id ? Date.now() : eventUnic.title}))
+          // calendarEvents: prevState.calendarEvents.map(
+          // eventUnic => ({ 
+          // ...eventUnic, 
+          // title: eventUnic.id === +info.event.id ? Date.now() : eventUnic.title}))
           }))
         info.jsEvent.preventDefault();
       } else {
@@ -83,6 +90,7 @@ export default class DemoApp extends React.Component {
   }
 
   render() {
+    console.log(this.state.calendarEvents)
     return (
       <div className="App">
         <Header />
@@ -97,7 +105,7 @@ export default class DemoApp extends React.Component {
           }}
         />
         <FormDialog 
-          handleChangeEvent={this.handleChangeEvent}
+          onSubmit={this.handleChangeEvent}
           handleClose={this.handleClose} 
           calendarEvents={this.state.calendarEvents} 
           setOpen={this.state.setOpen}
