@@ -18,38 +18,61 @@ export default class FormDialog extends React.Component {
     mapOnInfo: { 
       fullWidth: true,
       setFullWidth: true,
-      maxWidth: 'sm',
-      setMaxWidth: 'sm',
+      color: 'white',
+      changeBacground: 'black',
       title: '',
     }
   }
 
   handleSubmit = () => {
-    const { onSubmit, id } = this.props;
+    const { handleChangeEvent } = this.props;
     const { mapOnInfo } = this.state;
-    onSubmit(mapOnInfo, id);
+    console.log(mapOnInfo)
+    handleChangeEvent(mapOnInfo);
   }
     
-  handleMaxWidthChange = (event) => {
+  handlecolorChange = (event) => {
     const { value } = event.target;
 
     this.setState({
       mapOnInfo: {
-        setMaxWidth: value,
+        fullWidth: true,
+        setFullWidth: true,
+        color: 'black',
+        title: '',
+        changeBacground: value,
       },
     })
+  }
+
+  handleChange = (event) => {
+    const { value, name } = event.target;
+
+    this.setState({
+      mapOnInfo: {
+        fullWidth: true,
+        setFullWidth: true,
+        color: 'black',
+        changeBacground: 'white',
+        [name]: value,
+      },
+    });
   }
 
   handleFullWidthChange = (event) => {
     this.setState({
       mapOnInfo: {
+        fullWidth: true,
+        color: 'black',
+        changeBacground: 'white',
+        title: '',
         setFullWidth: event.target.checked,
       },
     })
   }
 
   render() {
-    const { handleClose, setOpen, handleChangeEvent, fullWidth, maxWidth, handleDelete, id } = this.props;
+    const { handleClose, setOpen, handleChangeEvent, fullWidth, color, handleDelete } = this.props;
 
     return (
       <div>
@@ -58,41 +81,44 @@ export default class FormDialog extends React.Component {
           open={setOpen} 
           onClose={handleClose} 
           fullWidth={fullWidth}
-          maxWidth={maxWidth}
+          color={color}
           aria-labelledby="max-width-dialog-title"
         >
           <DialogTitle id="form-dialog-title">New Event</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe 
+              Edit event
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Entered your event"
-              type="email"
+              label="Eddit name"
+              onChange={this.handleChange}
+              value={this.state.title}
+              name="title"
+              type="text"
               fullWidth
             />
              <form 
               onCange={this.handleSubmit}
               noValidate>
               <FormControl>
-                <InputLabel htmlFor="max-width">maxWidth</InputLabel>
+                <InputLabel htmlFor="max-width">color</InputLabel>
                 <Select
-                  value={maxWidth}
-                  onChange={this.handleMaxWidthChange}
+                  value={color}
+                  onChange={this.handlecolorChange}
                   inputProps={{
                     name: 'max-width',
                     id: 'max-width',
                   }}
                 >
                   <MenuItem value={false}>false</MenuItem>
-                  <MenuItem value="xs">xs</MenuItem>
-                  <MenuItem value="sm">sm</MenuItem>
-                  <MenuItem value="md">md</MenuItem>
-                  <MenuItem value="lg">lg</MenuItem>
-                  <MenuItem value="xl">xl</MenuItem>
+                  <MenuItem value="xs">blue</MenuItem>
+                  <MenuItem value="sm">red</MenuItem>
+                  <MenuItem value="md">white</MenuItem>
+                  <MenuItem value="lg">yellow</MenuItem>
+                  <MenuItem value="xl">green</MenuItem>
                 </Select>
               </FormControl>
               <FormControlLabel
@@ -105,7 +131,7 @@ export default class FormDialog extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button 
-            onClick={() => handleDelete(id)} 
+            onClick={() => handleDelete()} 
             color="primary">
               Delete
             </Button>

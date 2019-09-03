@@ -16,6 +16,7 @@ export default class DemoApp extends React.Component {
     open: false, 
     calendarEvents: [],
     id: '',
+    title: '',
   }
 
   componentWillMount() {
@@ -31,46 +32,40 @@ export default class DemoApp extends React.Component {
     }
 
   handleChangeEvent = (mapOnInfo) => {
-    console.log(mapOnInfo.title)
-    this.setState(prevState => ({
-      calendarEvent: prevState.calendarEvents.map(
-        eventUnic => ({ 
-        ...eventUnic, 
-        title: eventUnic.id === prevState.id ? mapOnInfo.title : eventUnic.title,
-        })),
-      setOpen: false,
-    }));  
+    this.setState((prevState) => {
+      const calendarEvents = prevState.calendarEvents
+        .map(event => (event.id === prevState.id
+          ? {
+            ...event,
+            title: mapOnInfo.title,
+            bacground: mapOnInfo.changeBacground,
+            
+          }
+          : event));
+      return {
+        setOpen: false,
+        calendarEvents,
+      };
+    })
   }
 
-  
+  handleEvent = (info) => {
+    const eventObj = info.event;
+    const id = this.state.calendarEvents.map(eventUnic => eventUnic.id === +info.event.id ? eventUnic.id : '').find(a => a === +info.event.id);
+      if (eventObj.allDay) {
+        this.setState({
+          setOpen: true,
+          id,
+          })
+        info.jsEvent.preventDefault();
+      } 
+  }
+
   handleDelete = () => {
     this.setState(prevState => ({
       setOpen: false,
       calendarEvents: prevState.calendarEvents.filter(todo => todo.id !== prevState.id),
     }));
-  }
-
-  handleEvent = (info) => {
-    const eventObj = info.event;
-    const id = this.state.calendarEvents.map(eventUnic => eventUnic.id === eventObj.id ? eventUnic.id : '').find(a => a === eventObj.id);
-
-      if (eventObj.allDay) {
-        this.setState(prevState => ({
-          setOpen: true,
-          id,
-          // calendarEvents: prevState.calendarEvents.map(
-          // eventUnic => ({ 
-          // ...eventUnic, 
-          // title: eventUnic.id === +info.event.id ? Date.now() : eventUnic.title}))
-          }))
-          // handleChangeEvent(id)
-
-        info.jsEvent.preventDefault();
-      } else {
-          this.setState({
-            setOpen: false,
-          });
-      }
   }
 
   handleDateClick = (arg) => {
@@ -103,7 +98,6 @@ export default class DemoApp extends React.Component {
   }
 
   render() {
-    console.log(this.state.calendarEvents)
     return (
       <div className="App">
         <Header />
@@ -118,14 +112,15 @@ export default class DemoApp extends React.Component {
           }}
         />
         <FormDialog 
-          onSubmit={this.handleChangeEvent}
+          handleChangeEvent={this.handleChangeEvent}
           handleClose={this.handleClose} 
           id={this.state.calendarEvents.map(event => event.id)} 
           setOpen={this.state.setOpen}
           handleDelete={this.handleDelete}
         />
-        <button type="button" onClick={this.handleDelete} >fdsfd</button>
+        {/* <button type="submit" onClick={this.handleDelete}>delete</button> */}
       </div>
     );
   }
 }
+
