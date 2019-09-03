@@ -25,10 +25,9 @@ export default class FormDialog extends React.Component {
   }
 
   handleSubmit = () => {
-    const { onSubmit, calendarEvents } = this.props;
+    const { onSubmit, id } = this.props;
     const { mapOnInfo } = this.state;
-    console.log(calendarEvents)
-    onSubmit(mapOnInfo, calendarEvents.id);
+    onSubmit(mapOnInfo, id);
   }
     
   handleMaxWidthChange = (event) => {
@@ -50,7 +49,7 @@ export default class FormDialog extends React.Component {
   }
 
   render() {
-    const { handleClose, setOpen, handleChangeEvent, fullWidth, maxWidth } = this.props;
+    const { handleClose, setOpen, handleChangeEvent, fullWidth, maxWidth, handleDelete, id } = this.props;
 
     return (
       <div>
@@ -106,13 +105,12 @@ export default class FormDialog extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button 
-            // onClick={() => handleDelete(handleChangeEvent)} 
+            onClick={() => handleDelete(id)} 
             color="primary">
-              Cancel
+              Delete
             </Button>
             <Button 
               onClick={this.handleSubmit}
-              // onClick={handleClose} 
               color="primary"
             >
               Subscribe

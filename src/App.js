@@ -8,13 +8,14 @@ import FullCalendar from '@fullcalendar/react';
 import interactionPlugin from '@fullcalendar/interaction';
 import Header from './Header';
 
-import './App.css' // webpack must be configured to do this
+import './App.css';
 
 export default class DemoApp extends React.Component {
   state = {
     setOpen: false,
     open: false, 
     calendarEvents: [],
+    id: '',
   }
 
   componentWillMount() {
@@ -29,29 +30,41 @@ export default class DemoApp extends React.Component {
       localStorage.setItem('calendarEvents', JSON.stringify(this.state.calendarEvents));
     }
 
-  handleChangeEvent = (mapOnInfo, id) => {
-    console.log(mapOnInfo, id)
+  handleChangeEvent = (mapOnInfo) => {
+    console.log(mapOnInfo.title)
     this.setState(prevState => ({
       calendarEvent: prevState.calendarEvents.map(
         eventUnic => ({ 
         ...eventUnic, 
-        title: mapOnInfo.title,
+        title: eventUnic.id === prevState.id ? mapOnInfo.title : eventUnic.title,
         })),
       setOpen: false,
     }));  
   }
+
   
+  handleDelete = () => {
+    this.setState(prevState => ({
+      setOpen: false,
+      calendarEvents: prevState.calendarEvents.filter(todo => todo.id !== prevState.id),
+    }));
+  }
 
   handleEvent = (info) => {
     const eventObj = info.event;
+    const id = this.state.calendarEvents.map(eventUnic => eventUnic.id === eventObj.id ? eventUnic.id : '').find(a => a === eventObj.id);
+
       if (eventObj.allDay) {
         this.setState(prevState => ({
           setOpen: true,
+          id,
           // calendarEvents: prevState.calendarEvents.map(
           // eventUnic => ({ 
           // ...eventUnic, 
           // title: eventUnic.id === +info.event.id ? Date.now() : eventUnic.title}))
           }))
+          // handleChangeEvent(id)
+
         info.jsEvent.preventDefault();
       } else {
           this.setState({
@@ -107,13 +120,11 @@ export default class DemoApp extends React.Component {
         <FormDialog 
           onSubmit={this.handleChangeEvent}
           handleClose={this.handleClose} 
-          calendarEvents={this.state.calendarEvents} 
+          id={this.state.calendarEvents.map(event => event.id)} 
           setOpen={this.state.setOpen}
+          handleDelete={this.handleDelete}
         />
-
-        <header className="App-header">
-         
-        </header>
+        <button type="button" onClick={this.handleDelete} >fdsfd</button>
       </div>
     );
   }
