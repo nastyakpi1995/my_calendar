@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+
+.fc-toolbar h2 {
+  content: 'Dec 31 - Jan 6';
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  margin: 0;
+  color: #4d4f5c;
+  margin-top: 64px !important;
+}
+
+.main__search__input_choice {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  color: #EAF0F4;
+}
+
+.main__search__choice {
+  margin-left: 15px;
+}
+
+.main__search__choice_title {
+  display: flex;
+}
+
+.fc-left {
+  margin-top: 64px !important;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  height: 109px;
+  grid-template-columns: 50% 50%;
+}
+
+.fc-button-primary {
+  color: #707070;
+  background-color: #fff;
+  border-color: #d7dae2;
+}
+
+.fc-button-primary:disabled {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #3b86ff;
+  background-color: rgb(255, 255, 255);
+  border-color: #2C3E50;
+}
+
+.fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #fff;
+  color: #3b86ff;
+  border-color: #d7dae2;
+}
+
+.fc-right {
+  margin-bottom: 14px;
+  background-image: none;
+}
+
+.fc th { 
+  color: #a3a6b4;
+  font-size: 11px;
+  border-style: none;
+  vertical-align: inherit;
+}
+
+.fc-unthemed td.fc-today {
+  background: #eAf0f4;
+}
+
+.fc .fc-ltr .fc-unthemed {
+  padding: 0 10px;
+}  
+
+.fc-ltr .fc-dayGrid-view .fc-day-top .fc-day-number {
+    color: #43425d;
+}
+
+.main__calendar {
+  position: absolute;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #4d4f5c;
+}
+
+.fc .fc-ltr .fc-unthemed {
+  margin: 0 20px 190px 40px;
+}
+
+.fc-unthemed th, .fc-unthemed .fc-list-heading td {
+   height: 45px;
+   background: #EAF0F4;
+}
+
+.fc-unthemed tbody {
+  vertical-align: top;
+}
+
+
+.main__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.main {
+  background: #43425d;
+  min-width: 260px;
+}
+
+.main__search {
+  margin-right: 10px;
+}
+
+.main__search__input {
+  height: 53px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+}
+
+.main__calendar_ni {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #43425D;
+  text-align: left;
+  font-size: 28px;
+  padding-left: 75px;
+}
+
+.main__search__input_choice {
+  margin: 0;
+  padding: 0;
+}
+
+.main__calendar__wrapper {
+  height: 1170px;
+  width: 335px;
+}
+
+.main__calendar__n {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

@@ -1,33 +1,34 @@
+@import "~@fullcalendar/core/main.css";
+@import "~@fullcalendar/daygrid/main.css";
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: #f0f0f7;
+  height: 1025px;
 }
 
-.App-link {
-  color: #61dafb;
+.fc-right .fc-prev-button, .fc-right .fc-next-button{
+  background-color: #b1d583;
+  background-image: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body .fc {
+  background: white;
+  padding: 0 20px;
+  margin: 0 20px 190px 75px;
+}
+
+.body .fc::before {
+  content: 'dfd';
+  color: black;
+}
+
+.MuiDialogContent-root:first-child {
+  width: auto !important;
 }
