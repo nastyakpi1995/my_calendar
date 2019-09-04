@@ -20,7 +20,13 @@
 
 body .fc {
   background: white;
-  margin: 0 10px;
+  padding: 0 20px;
+  margin: 0 20px 190px 75px;
+}
+
+.body .fc::before {
+  content: 'dfd';
+  color: black;
 }
 
 .MuiDialogContent-root:first-child {

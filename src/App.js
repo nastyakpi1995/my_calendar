@@ -48,7 +48,6 @@ export default class DemoApp extends React.Component {
       return {
         setOpen: false,
         calendarEvents,
-        mapOnInfo: {},
       };
     })
   }
@@ -123,7 +122,10 @@ export default class DemoApp extends React.Component {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
           }}
-          
+          footer={{
+            center: '',
+          }}          
+
           buttonText={{
             prevYear: '', 
             prev: 'Back',

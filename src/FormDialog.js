@@ -37,8 +37,6 @@ export default class FormDialog extends React.Component {
 
   handleSubmit = () => {
     const { handleChangeEvent } = this.props;
-    const { mapOnInfo } = this.state;
-    console.log(mapOnInfo)
     handleChangeEvent(this.state);
     this.setState({
       eventDate: '',

@@ -10,6 +10,23 @@
   margin-top: 64px !important;
 }
 
+.main__search__input_choice {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  color: #EAF0F4;
+}
+
+.main__search__choice {
+  margin-left: 15px;
+}
+
+.main__search__choice_title {
+  display: flex;
+}
+
 .fc-left {
   margin-top: 64px !important;
 }
@@ -68,6 +85,10 @@
   color: #4d4f5c;
 }
 
+.fc .fc-ltr .fc-unthemed {
+  margin: 0 20px 190px 40px;
+}
+
 .fc-unthemed th, .fc-unthemed .fc-list-heading td {
    height: 45px;
    background: #EAF0F4;
@@ -77,9 +98,6 @@
   vertical-align: top;
 }
 
-body .fc {
-  padding-left: 20px;
-}
 
 .main__container {
   display: flex;
@@ -91,12 +109,29 @@ body .fc {
   min-width: 260px;
 }
 
+.main__search {
+  margin-right: 10px;
+}
+
 .main__search__input {
   height: 53px;
   color: #fff;
   display: flex;
   align-items: center;
   padding: 0 25px;
+}
+
+.main__calendar_ni {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #43425D;
+  text-align: left;
+  font-size: 28px;
+  padding-left: 75px;
+}
+
+.main__search__input_choice {
+  margin: 0;
+  padding: 0;
 }
 
 .main__calendar__wrapper {
