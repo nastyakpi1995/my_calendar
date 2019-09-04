@@ -65,23 +65,17 @@ const Main = () => (
       />
       Chat Room
     </div>
-    <div className="main__search__input_choice">
-    <img
-        src="img/Vertical Line.svg"
-        alt="search"
-        className="main__search__choice"
-      />
+    <div className="main__search__input">
       <img
         src="img/icon_search.svg"
         alt="search"
-        className="main__search__choice"
+        className="main__search"
       />
-      <div className="main__search__choice_title"></div>
       Calendar
     </div>
     <div className="main__search__input">
       <img
-        src="img/icon_search.svg"
+        src="img/img/SupportIocn.svg.svg"
         alt="search"
         className="main__search"
       />
