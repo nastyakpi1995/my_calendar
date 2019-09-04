@@ -5,4 +5,24 @@
 
 .App {
   text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f0f0f7;
+  height: 1025px;
+}
+
+.fc-right .fc-prev-button, .fc-right .fc-next-button{
+  background-color: #b1d583;
+  background-image: none;
+}
+
+body .fc {
+  background: white;
+  margin: 0 10px;
+}
+
+.MuiDialogContent-root:first-child {
+  width: auto !important;
 }

@@ -4,68 +4,71 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import './FormDialog.css';
 
 export default class FormDialog extends React.Component {
   state = {
-    mapOnInfo: { 
-      fullWidth: true,
-      setFullWidth: true,
-      color: 'white',
-      changeBacground: 'black',
-      title: '',
-    }
+    title: '',
+    eventDate: '',
+    eventTime: '',
+    notes: '',
+  }
+
+  handleDateChange = (date) => {
+    this.setState(prevState => ({
+      ...prevState,
+      eventDate: date,
+    }));
+  }
+
+  handleDateChange__time = (date) => {
+    this.setState(prevState => ({
+      ...prevState,
+      eventTime: date,
+    }));
   }
 
   handleSubmit = () => {
     const { handleChangeEvent } = this.props;
     const { mapOnInfo } = this.state;
     console.log(mapOnInfo)
-    handleChangeEvent(mapOnInfo);
-  }
-    
-  handlecolorChange = (event) => {
-    const { value } = event.target;
-
+    handleChangeEvent(this.state);
     this.setState({
-      mapOnInfo: {
-        fullWidth: true,
-        setFullWidth: true,
-        color: 'black',
-        title: '',
-        changeBacground: value,
-      },
+      eventDate: '',
+      eventTime: '',
+      notes: '',
+      title: '',
     })
   }
 
   handleChange = (event) => {
-    const { value, name } = event.target;
+    const { value } = event.target;
 
-    this.setState({
-      mapOnInfo: {
-        fullWidth: true,
-        setFullWidth: true,
-        color: 'black',
-        changeBacground: 'white',
-        [name]: value,
-      },
-    });
+    this.setState(prevState => ({
+      ...prevState,
+      notes: value,
+    }));
+  }
+
+  handleChange__title = (event) => {
+    const { value } = event.target;
+
+    this.setState(prevState => ({
+      ...prevState,
+      title: value,
+    }));
   }
 
   handleFullWidthChange = (event) => {
     this.setState({
       mapOnInfo: {
-        fullWidth: true,
-        color: 'black',
-        changeBacground: 'white',
-        title: '',
         setFullWidth: event.target.checked,
       },
     })
@@ -84,63 +87,77 @@ export default class FormDialog extends React.Component {
           color={color}
           aria-labelledby="max-width-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">New Event</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Edit event
-            </DialogContentText>
+            <button className="dialog__button" type='button' onClick={handleClose}>x</button>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Eddit name"
-              onChange={this.handleChange}
+              label="event name"
+              onChange={this.handleChange__title}
               value={this.state.title}
               name="title"
               type="text"
               fullWidth
             />
-             <form 
-              onCange={this.handleSubmit}
-              noValidate>
-              <FormControl>
-                <InputLabel htmlFor="max-width">color</InputLabel>
-                <Select
-                  value={color}
-                  onChange={this.handlecolorChange}
-                  inputProps={{
-                    name: 'max-width',
-                    id: 'max-width',
-                  }}
-                >
-                  <MenuItem value={false}>false</MenuItem>
-                  <MenuItem value="xs">blue</MenuItem>
-                  <MenuItem value="sm">red</MenuItem>
-                  <MenuItem value="md">white</MenuItem>
-                  <MenuItem value="lg">yellow</MenuItem>
-                  <MenuItem value="xl">green</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControlLabel
-                control={
-                  <Switch checked={this.fullWidth} onChange={this.handleFullWidthChange} value="title" />
-                }
-                label="Full width"
-              />
-            </form>
-          </DialogContent>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+        <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          name="eventDate"
+          id="date-picker-inline"
+          label="event date"
+          value={this.state.eventDate}
+          onChange={this.state.handleDateChange}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        </Grid>
+    </MuiPickersUtilsProvider>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Grid container justify="space-around">
+          <KeyboardTimePicker
+            margin="normal"
+            id="time-picker"
+            label="event time"
+            name="eventTime"
+            value={this.state.eventTime}
+            onChange={this.handleDateChange__time}
+            KeyboardButtonProps={{
+              'aria-label': 'event time',
+            }}
+          />
+      </Grid>
+    </MuiPickersUtilsProvider>
+    <TextField
+      autoFocus
+      margin="dense"
+      id="name"
+      label="notes"
+      onChange={this.handleChange}
+      value={this.state.notes}
+      name="notes"
+      type="text"
+      fullWidth
+    />
+      </DialogContent>
           <DialogActions>
             <Button 
             onClick={() => handleDelete()} 
-            color="primary">
-              Delete
+            color="primary"
+            classname="button__Cansel">
+              Cancel
             </Button>
-            <Button 
+            <button 
               onClick={this.handleSubmit}
-              color="primary"
+              className="button__Save"
             >
-              Subscribe
-            </Button>
+              Save
+            </button>
           </DialogActions>
         </Dialog>
       </div>

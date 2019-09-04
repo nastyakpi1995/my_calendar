@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+.dialog__button {
+  box-sizing: content-box;
+  color: #d6d6d6;
+  background: white;
+  position: absolute;
+  border: 1px solid #d6d6d6;
+  border-radius: 50%;
+  height: 20px;
+  right: 7px;
+  top: 6px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.MuiDialogActions-root {
+  justify-content: space-between !important;
+}
+
+#button__Save {
+  color: #6A6996 !important;
+}
+
+.MuiButton-root {
+  text-transform: none !important;
+}
+
+.MuiButton-label {
+  color: #ff5f5f;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.MuiDialogActions-spacing > * + * {
+  margin-right: 9px;
+  margin-left: 8px;
+}
+
+.button__Save {
+  border: none;
+  background: none;
+  color: #6a6996;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.MuiDialogContent-root:first-child {
+  width: 201px;
+}
+

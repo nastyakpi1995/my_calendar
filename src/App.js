@@ -5,8 +5,10 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import FullCalendar from '@fullcalendar/react';
+import bootstrapPlugin from '@fullcalendar/bootstrap';
 import interactionPlugin from '@fullcalendar/interaction';
 import Header from './Header';
+import Main from './Main';
 
 import './App.css';
 
@@ -16,7 +18,6 @@ export default class DemoApp extends React.Component {
     open: false, 
     calendarEvents: [],
     id: '',
-    title: '',
   }
 
   componentWillMount() {
@@ -32,19 +33,22 @@ export default class DemoApp extends React.Component {
     }
 
   handleChangeEvent = (mapOnInfo) => {
+    console.log(mapOnInfo)
     this.setState((prevState) => {
       const calendarEvents = prevState.calendarEvents
         .map(event => (event.id === prevState.id
           ? {
             ...event,
             title: mapOnInfo.title,
-            bacground: mapOnInfo.changeBacground,
-            
+            end: mapOnInfo.eventTime,
+            notes: mapOnInfo.notes,
+            start: mapOnInfo.eventTime,
           }
           : event));
       return {
         setOpen: false,
         calendarEvents,
+        mapOnInfo: {},
       };
     })
   }
@@ -69,17 +73,18 @@ export default class DemoApp extends React.Component {
   }
 
   handleDateClick = (arg) => {
+    console.log(arg.dayEl.style)
     this.setState(prevState => ({
       calendarEvents: [
         ...prevState.calendarEvents,
         {
           timeZone: 'local',
-          title: prevState.title,
+          title: '',
+          notes: '',
           start: arg.date,
           allDay: arg.allDay,
-          end: new Date(),
+          end: arg.date,
           id: Date.now(),
-          bacground: arg.dayEl.style.backgroundColor = 'blue',
         },
       ],
     }));
@@ -100,17 +105,38 @@ export default class DemoApp extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+          <Header />
+          <div className="main__container">
+        <Main />
+        <div className="main__calendar__n">
+          <h4 className="main__calendar_ni">Calendar</h4>
         <FullCalendar 
+          className="clendar__main"
           defaultView="dayGridMonth" 
-          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin]}
+          plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin, listPlugin, bootstrapPlugin]}
           events={this.state.calendarEvents} 
           dateClick={this.handleDateClick}
           eventClick={this.handleEvent}
+          eventLimit= 'true'
           header={{
-            left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+            left: '" " today,prev,next', 
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
           }}
+          
+          buttonText={{
+            prevYear: '', 
+            prev: 'Back',
+            next: 'Next',
+            today: 'Today',
+            month: 'Month',
+            week: 'Week',
+            day: 'Day',
+            list: 'Agenda',
+        }}
         />
+        </div>
+      
         <FormDialog 
           handleChangeEvent={this.handleChangeEvent}
           handleClose={this.handleClose} 
@@ -118,7 +144,7 @@ export default class DemoApp extends React.Component {
           setOpen={this.state.setOpen}
           handleDelete={this.handleDelete}
         />
-        {/* <button type="submit" onClick={this.handleDelete}>delete</button> */}
+          </div>
       </div>
     );
   }
