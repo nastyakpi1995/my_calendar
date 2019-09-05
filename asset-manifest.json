@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/my_calendar/static/css/main.3bc2e4ab.chunk.css",
-    "main.js": "/my_calendar/static/js/main.f5f930cb.chunk.js",
-    "main.js.map": "/my_calendar/static/js/main.f5f930cb.chunk.js.map",
+    "main.css": "/my_calendar/static/css/main.1bf1f00f.chunk.css",
+    "main.js": "/my_calendar/static/js/main.5ba89c61.chunk.js",
+    "main.js.map": "/my_calendar/static/js/main.5ba89c61.chunk.js.map",
     "runtime~main.js": "/my_calendar/static/js/runtime~main.ca4dda66.js",
     "runtime~main.js.map": "/my_calendar/static/js/runtime~main.ca4dda66.js.map",
     "static/css/2.1d370722.chunk.css": "/my_calendar/static/css/2.1d370722.chunk.css",
     "static/js/2.55ebe184.chunk.js": "/my_calendar/static/js/2.55ebe184.chunk.js",
     "static/js/2.55ebe184.chunk.js.map": "/my_calendar/static/js/2.55ebe184.chunk.js.map",
     "index.html": "/my_calendar/index.html",
-    "precache-manifest.7e251d6062b3dae6741ce9fb214600ac.js": "/my_calendar/precache-manifest.7e251d6062b3dae6741ce9fb214600ac.js",
+    "precache-manifest.446b1711f48a438d1971948b8d367263.js": "/my_calendar/precache-manifest.446b1711f48a438d1971948b8d367263.js",
     "service-worker.js": "/my_calendar/service-worker.js",
     "static/css/2.1d370722.chunk.css.map": "/my_calendar/static/css/2.1d370722.chunk.css.map",
-    "static/css/main.3bc2e4ab.chunk.css.map": "/my_calendar/static/css/main.3bc2e4ab.chunk.css.map"
+    "static/css/main.1bf1f00f.chunk.css.map": "/my_calendar/static/css/main.1bf1f00f.chunk.css.map"
   }
 }
